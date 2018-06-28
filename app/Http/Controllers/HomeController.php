@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Menu;
 use App\MenuProduct;
 use App\OrderFood;
+use App\Printer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Cart;
@@ -153,25 +154,75 @@ class HomeController extends Controller
 
             if($printCode->table_id == Session::get('tableId') && (Carbon::now()->timezone('Asia/Taipei')->toDateTimeString() < $printCode->used_time)){
                 if($this->cart->items !=null){
-                    $printData = '<CB>御滿屋</CB><BR><BR>';
+                    $temp = '<CB>御滿屋</CB><BR><BR>';
+                    $temp .= '名稱　　　　　 桌號  數量 <BR>';
+                    $temp .= '--------------------------------<BR>';
 
-                    $order = Order::where('table_id', Session::get('tableId'))->first();
+                    $order = Order::where('table_id', Session::get('tableId'))
+                            ->where('paid',0)
+                            ->first();
 
                     if($order === null){
                         $order = new Order;
                         $order->table_id = Session::get('tableId');
+                        $order->restaurant_id = $request->restaurantId;
+                        $order->order_type_id = $request->orderTypeId;
                     }
                     $order->quantity += $this->cart->totalQty;
-                    $order->restaurant_id = $request->restaurantId;
-                    $order->order_type_id = $request->orderTypeId;
                     $order->save();
+
+                    $printerFood = $temp;
+                    $printerSushi = $temp;
+                    $printerDessert = $temp;
                     foreach($this->cart->items as $item){
                         $orderFood = new OrderFood;
                         $orderFood->order_id = $order->id;
                         $orderFood->product_id = $item['items']->id;
-                        $orderFood->quantity = $item['qty'];;
+                        $orderFood->quantity = $item['qty'];
                         $orderFood->save();
+
+                        $product = MenuProduct::find($item['items']->id);
+                        $printer = Printer::find($product->printer_id);
+
+                        if($printer->printer_type_id == 1){
+                            //熟食
+                            $printerFood .= $product->name . '　　　　 　' . Session::get('tableId') . '   ' . $item['qty'] . '<BR>';
+        
+                        }elseif($printer->printer_type_id == 2){
+                            //壽司
+                            $printerFood .= $product->name . '　　　　 　' . Session::get('tableId') . '   ' . $item['qty'] . '<BR>';
+
+                        }elseif($printer->printer_type_id == 3){
+                            //甜品
+                            $printerFood .= $product->name . '　　　　 　' . Session::get('tableId') . '   ' . $item['qty'] . '<BR>';
+                        }else{
+
+                        }
                     }
+
+                    $printerFood .= '--------------------------------<BR>';
+                    $printerSushi .= '--------------------------------<BR>';
+                    $printerDessert .= '--------------------------------<BR>';
+                    $printers = Printer::all();
+
+                    foreach($printers as $printer){
+                        if($printer->printer_type_id == 1){
+                            //熟食
+                            $this->setPrinter($printer->account, $printer->account_key, $printer->printer_sn);
+                            $this->getPrint($printerFood);
+        
+                        }elseif($printer->printer_type_id == 2){
+                            //壽司
+                            $this->setPrinter($printer->account, $printer->account_key, $printer->printer_sn);
+                            $this->getPrint($printerFood);
+
+                        }elseif($printer->printer_type_id == 3){
+                            //甜品
+                            $this->setPrinter($printer->account, $printer->account_key, $printer->printer_sn);
+                            $this->getPrint($printerFood);
+                        }
+                    }
+                    
                     $request->session()->put('cart',$this->cart);
                     $request->session()->forget('cart');
                     return view('confirmation');

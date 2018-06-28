@@ -196,7 +196,7 @@ class AdminController extends Controller
 
     public function order()
     {
-        $orders = Order::all();
+        $orders = Order::where('paid',0)->get();
 
         return view('admin.order.index',compact('orders'));
     }
@@ -208,7 +208,7 @@ class AdminController extends Controller
                    and order_foods.product_id = menu_products.id
                    and orders.restaurant_id = :restaurant_id
                    and orders.id = :id
-                   group by orders.id,order_foods.product_id,order_foods.quantity', ['id' => $id,'restaurant_id' => Auth::user()->restaurant_id]);
+                   group by orders.id,order_foods.product_id', ['id' => $id,'restaurant_id' => Auth::user()->restaurant_id]);
 
         $order = Order::find($id)->first();
 
