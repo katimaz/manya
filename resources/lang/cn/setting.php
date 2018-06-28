@@ -14,6 +14,9 @@ return [
     */
 
     'title' => '御滿屋',
+    'tableId' => '桌號',
+    'password' => '密碼',
+    'confirm' => '確認',
 
 ];
 

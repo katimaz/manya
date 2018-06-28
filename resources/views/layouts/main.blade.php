@@ -153,15 +153,15 @@
                 @csrf
                 @if(!session()->has('tableId'))
                 <div class="form-group">
-                    <label>Table Id</label>
+                    <label>@lang('setting.tableId')</label>
                     <input type="text" class="form-control" id="tableId" name="tableId" placeholder="Enter Table Id">
                 </div>
                 @endif
                 <div class="form-group">
-                    <label>Input Code</label>
+                    <label>@lang('setting.password')</label>
                     <input type="text" class="form-control" id="printCode" name="print_code" placeholder="Enter Code">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">@lang('setting.confirm')</button>
             </form>
         </div>
     @endif
