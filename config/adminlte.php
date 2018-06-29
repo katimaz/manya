@@ -153,6 +153,14 @@ return [
             'icon'        => 'print',
 //            'label'       => 4,
             'label_color' => 'success',
+            'can'  => 'show-menu',
+        ],
+        [
+            'text'        => '管理',
+            'url'         => 'admin/table',
+            'icon'        => 'table',
+//            'label'       => 4,
+            'label_color' => 'success',
         ],
 //        [
 //            'text'        => 'Kitchen',

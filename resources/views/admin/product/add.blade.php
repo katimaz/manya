@@ -54,7 +54,7 @@
                         <div class="col-sm-8">
                             <input name="image" type="file" accept="image/*" onchange="readURL(this)">
                             <br/>
-                            <img style="width:400" id="preview_image"/>
+                            <img style="width:300px" id="preview_image"/>
                         </div>
                     </div>
                     <div class="form-group">

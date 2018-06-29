@@ -57,6 +57,8 @@ Route::get('/admin/printer/delete/{id}', 'AdminController@deletePrinter')->name(
 //Route::post('/admin/promotion/create', 'PromotionController@createPromotion')->name('admin.promotion.create');
 //Route::get('/admin/promotion/delete/{id}', 'PromotionController@deletePromotion')->name('admin.promotion.deleteProduct');
 
+Route::get('/admin/table', 'AdminController@table')->name('admin.table');
+
 Route::get('/printer', 'PrinterController@index');
 
 Route::get('/admin/getMenuOption', 'AdminController@getMenuOption');

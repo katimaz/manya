@@ -204,6 +204,13 @@ class AdminController extends Controller
         return view('admin.order.index',compact('orders'));
     }
 
+    public function table()
+    {
+
+
+        return view('admin.table.info');
+    }
+
     public function detailOrder($id){
 
         $orderFoods  = DB::select('SELECT orders.id,order_foods.product_id,sum(order_foods.quantity) as sum_quantity,menu_products.name,menu_products.description,menu_products.image_url,orders.paid FROM `orders`,`order_foods`,menu_products 
