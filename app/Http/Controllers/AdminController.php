@@ -16,6 +16,7 @@ use Image;
 use DB;
 use Auth;
 use App\Traits\Printer;
+use Session;
 
 class AdminController extends Controller
 {
@@ -165,8 +166,8 @@ class AdminController extends Controller
         }
 
         $menu->save();
-
-        return redirect()->back();
+        session(['success' => '已修改.']);
+        return back();
     }
 
     public function createMenu(Request $request)
@@ -232,6 +233,13 @@ class AdminController extends Controller
         $order->paid = $request->paid;
 
         $order->save();
+
+        return "SUCCESS";
+    }
+
+    public function paidOrder(Request $request){
+
+        Order::where('table_id',$request->table_id)->update(['paid' => 1]);
 
         return "SUCCESS";
     }

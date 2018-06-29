@@ -148,14 +148,6 @@ return [
             'can'  => 'show-menu',
         ],
         [
-            'text'        => '影印密碼',
-            'url'         => 'admin/showKey',
-            'icon'        => 'print',
-//            'label'       => 4,
-            'label_color' => 'success',
-            'can'  => 'show-menu',
-        ],
-        [
             'text'        => '管理',
             'url'         => 'admin/table',
             'icon'        => 'table',

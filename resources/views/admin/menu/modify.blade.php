@@ -12,9 +12,19 @@
 
 @section('content')
     {{--<div class="container">--}}
+
         <div class="row">
 
-            <div class="col-md-12">
+            @if(session('success'))
+                <div class="alert alert-success alert-block" id="success-alert">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {{session('success')}}
+                </div>
+                {{session()->forget('success')}}
+            @endif
+
+
+                <div class="col-md-12">
                 <form class="form-horizontal" method="post" action="{{url('admin/menu/modify/'.$menu->id)}}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
@@ -70,5 +80,8 @@
             reader.readAsDataURL(input.files[0]);
             }
         }
+        setTimeout(function() {
+            $("#success-alert").alert('close');
+        }, 2000);
     </script>
 @stop

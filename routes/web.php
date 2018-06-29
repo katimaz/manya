@@ -38,6 +38,7 @@ Route::get('/admin/product/delete/{id}', 'AdminController@deleteProduct')->name(
 Route::get('/admin/order', 'AdminController@order')->name('admin.order');
 Route::get('/admin/order/detail/{id}', 'AdminController@detailOrder')->name('admin.order.modify');
 Route::post('/admin/order/detail/{id}', 'AdminController@updateOrder')->name('admin.order.updateOrder');
+Route::post('/admin/order/paidOrder', 'AdminController@paidOrder')->name('admin.order.paidOrder');
 //Route::post('/admin/order/create', 'AdminController@createOrder')->name('admin.order.create');
 //Route::get('/admin/order/delete/{id}', 'AdminController@deleteOrder')->name('admin.order.deleteOrder');
 
