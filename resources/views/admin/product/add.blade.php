@@ -54,6 +54,7 @@
                         <div class="col-sm-8">
                             <input name="image" type="file" accept="image/*" onchange="readURL(this)">
                             <br/>
+                            <img style="width:400" id="preview_image"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -61,7 +62,6 @@
                             <button type="submit" class="btn btn-default" >@lang('admin.add')</button>
                         </div>
                     </div>
-                    <img id="preview_image"/>
                 </form>
             </div>
         </div>
