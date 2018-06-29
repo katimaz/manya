@@ -18,13 +18,13 @@
                 <form class="form-horizontal" method="post" action="{{url('admin/product/modify/'.$product->id)}}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="name">Name:</label>
+                        <label class="control-label col-sm-2" for="name">@lang('admin.product.name'):</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name" value="{{$product->name}}">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="name">Description:</label>
+                        <label class="control-label col-sm-2" for="name">@lang('admin.product.description'):</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="name" placeholder="Enter Description" name="description" value="{{$product->description}}">
                             <input id="active" type="hidden" name="active" value="{{$product->active}}">
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2">Type</label>
+                        <label class="control-label col-sm-2">@lang('admin.product.type')</label>
                         <div class="col-sm-8">
                             <select class="form-control" id="menu_id" name="menu_id">
                                 @foreach($menus as $menu)
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2">Printer</label>
+                        <label class="control-label col-sm-2">@lang('admin.product.printer')</label>
                         <div class="col-sm-8">
                             <select class="form-control" id="printer_id" name="printer_id">
                                 @foreach($printers as $printer)
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="image">Image:</label>
+                        <label class="control-label col-sm-2" for="image">@lang('admin.product.image'):</label>
                         <div class="col-sm-8">
                             <input name="image" type="file" accept="image/*" onchange="readURL(this)">
                             <br/>
@@ -89,7 +89,7 @@
                     {{--</div>--}}
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default" >Edit</button>
+                            <button type="submit" class="btn btn-default" >@lang('admin.edit')</button>
                         </div>
                     </div>
                 </form>

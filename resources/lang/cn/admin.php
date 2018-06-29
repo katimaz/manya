@@ -40,6 +40,13 @@ return [
     'order.paid' =>'已付款',
     'order.unpaid' =>'未付款',
 
+    'product.name' =>'食物名稱',
+    'product.type' =>'菜單類別',
+    'product.description' =>'內容',
+    'product.sold' =>'停止銷售',
+    'product.image' =>'圖片',
+    'product.printer' =>'影印機',
+
 
 ];
 

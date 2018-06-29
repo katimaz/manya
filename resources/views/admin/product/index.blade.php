@@ -16,11 +16,11 @@
     <table class="table table-striped table-bordered" id="product-table">
         <thead>
         <tr>
-            <th>食物名稱</th>
-            <th>菜單類別</th>
-            <th>內容</th>
-            <th>停止銷售</th>
-            <th>圖片</th>
+            <th>@lang('admin.product.name')</th>
+            <th>@lang('admin.product.type')</th>
+            <th>@lang('admin.product.description')</th>
+            <th>@lang('admin.product.sold')</th>
+            <th>@lang('admin.product.image')</th>
             <th></th>
         </tr>
         </thead>
