@@ -18,25 +18,25 @@
             <form class="form-horizontal" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="name">Order ID:</label>
+                    <label class="control-label col-sm-2" for="name">@lang('admin.order.orderid'):</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" value="{{$order->id.$order->table_id}}" disabled>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="name">Table:</label>
+                    <label class="control-label col-sm-2" for="name">@lang('admin.order.tableid'):</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" value="{{$order->table_id}}" disabled>
                     </div>
                 </div>
+                {{--<div class="form-group">--}}
+                    {{--<label class="control-label col-sm-2" for="name">Order Time:</label>--}}
+                    {{--<div class="col-sm-8">--}}
+                        {{--<input type="text" class="form-control" value="{{$order->created_at}}" disabled>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="name">Order Time:</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" value="{{$order->created_at}}" disabled>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2">Paid</label>
+                    <label class="control-label col-sm-2">@lang('admin.order.paidstatus')</label>
                     <div class="col-sm-6">
                         @if(!$order->paid)
                             <input id="toggle-checkbox" type="checkbox" data-toggle="toggle" data-size="mini">

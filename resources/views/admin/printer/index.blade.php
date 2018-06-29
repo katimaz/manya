@@ -16,12 +16,12 @@
     <table class="table table-striped table-bordered" id="product-table">
         <thead>
         <tr>
-            <th>名稱</th>
-            <th>帳號</th>
-            <th>密碼</th>
-            <th>影印機序號</th>
-            <th>影印機密碼</th>
-            <th>分類</th>
+            <th>@lang('admin.printer.name')</th>
+            <th>@lang('admin.printer.account')</th>
+            <th>@lang('admin.printer.accountkey')</th>
+            <th>@lang('admin.printer.printerkey')</th>
+            <th>@lang('admin.printer.printersn')</th>
+            <th>@lang('admin.printer.type')</th>
             <th></th>
         </tr>
         </thead>

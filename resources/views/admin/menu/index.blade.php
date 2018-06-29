@@ -15,7 +15,7 @@
     <table class="table table-striped table-bordered" id="menus-table">
         <thead>
         <tr>
-            <th>名稱</th>
+            <th>@lang('admin.menu.name')</th>
             {{--<th>Image</th>--}}
             {{--<th>Menu Image</th>--}}
             <th></th>
