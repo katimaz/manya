@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'QuickOrder')
+@section('title', '御滿屋')
 
 @section('css')
 
@@ -59,7 +59,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default" >Add</button>
+                        <button type="submit" class="btn btn-default" >@lang('admin.add')</button>
                     </div>
                 </div>
             </form>

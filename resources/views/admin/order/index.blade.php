@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'QuickOrder')
+@section('title', '御滿屋')
 
 @section('css')
 
@@ -14,10 +14,10 @@
     <table class="table table-striped table-bordered" id="order-table">
         <thead>
         <tr>
-            <th>訂號號碼</th>
-            <th>桌號</th>
-            <th>數量</th>
-            <th>已付款</th>
+            <th>@lang('admin.order.orderid')</th>
+            <th>@lang('admin.order.tableid')</th>
+            <th>@lang('admin.order.quantity')</th>
+            <th>@lang('admin.order.paidstatus')</th>
             <th></th>
         </tr>
         </thead>
@@ -28,9 +28,9 @@
                 <td>{{$order->table_id}}</td>
                 <td>{{$order->quantity}}</td>
                 @if($order->paid)
-                    <td>Paid</td>
+                    <td>@lang('admin.order.paid')</td>
                 @else
-                    <td>Not Paid</td>
+                    <td>@lang('admin.order.unpaid')</td>
                 @endif
 
                 <td>

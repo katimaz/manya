@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'QuickOrder')
+@section('title', '御滿屋')
 
 @section('css')
 
@@ -18,7 +18,7 @@
                 <form class="form-horizontal" method="post" action="{{url('admin/menu/modify/'.$menu->id)}}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="name">Name:</label>
+                        <label class="control-label col-sm-2" for="name">@lang('admin.menu.name'):</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name" value="{{$menu->name}}">
                         </div>
@@ -41,7 +41,7 @@
                     {{--</div>--}}
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default" >Edit</button>
+                            <button type="submit" class="btn btn-default" >@lang('admin.edit')</button>
                         </div>
                     </div>
                 </form>
