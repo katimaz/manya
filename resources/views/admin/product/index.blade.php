@@ -19,6 +19,7 @@
             <th>@lang('admin.product.name')</th>
             <th>@lang('admin.product.type')</th>
             <th>@lang('admin.product.description')</th>
+            <th>@lang('admin.product.printer')</th>
             <th>@lang('admin.product.sold')</th>
             <th>@lang('admin.product.image')</th>
             <th></th>
