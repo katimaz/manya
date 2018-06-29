@@ -19,6 +19,7 @@
             <th>食物名稱</th>
             <th>菜單類別</th>
             <th>內容</th>
+            <th>影印機種類</th>
             <th>停止銷售</th>
             <th>圖片</th>
             <th></th>
@@ -30,6 +31,15 @@
                 <td>{{$product->products_name}}</td>
                 <td>{{$product->name}}</td>
                 <td>{{$product->description}}</td>
+                @if($product->printer_id == "2")
+                    <td>甜品</td>
+                @elseif($product->printer_id=="6")
+                    <td>壽司</td>
+                @elseif($product->printer_id =="8")
+                    <td>熟食</td>
+                @else
+
+                @endif
                 @if(!$product->active)
                     <td>Yes</td>
                 @else

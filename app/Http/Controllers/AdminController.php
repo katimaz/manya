@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\MenuProduct;
 use App\Order;
 use App\PrintCode;
-use App\Printer;
+use App\Printer as Printers;
 use App\PrinterType;
 use App\Product;
 use Illuminate\Http\Request;
@@ -15,9 +15,12 @@ use DataTables;
 use Image;
 use DB;
 use Auth;
+use App\Traits\Printer;
 
 class AdminController extends Controller
 {
+    use Printer;
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -48,7 +51,7 @@ class AdminController extends Controller
     {
         $menus = Menu::where('restaurant_id',Auth::user()->restaurant_id)->get();
 
-        $printers = Printer::all();
+        $printers = Printers::all();
 
         return view('admin.product.add',compact('menus','printers'));
     }
@@ -80,7 +83,7 @@ class AdminController extends Controller
 
         $menus = Menu::all();
 
-        $printers = Printer::all();
+        $printers = Printers::all();
 
         return view('admin.product.modify',compact('product','menus','printers'));
     }
@@ -210,7 +213,7 @@ class AdminController extends Controller
                    and orders.id = :id
                    group by orders.id,order_foods.product_id', ['id' => $id,'restaurant_id' => Auth::user()->restaurant_id]);
 
-        $order = Order::find($id)->first();
+        $order = Order::where('id',$id)->first();
 
         return view('admin.order.detail',compact('order','orderFoods'));
     }
@@ -232,21 +235,21 @@ class AdminController extends Controller
 
     public function printer()
     {
-        $printers = Printer::join('printer_types','printer_types.id','printers.printer_type_id')->select('*','printers.id as printer_id','printers.name as printer_name')->get();
+        $printers = Printers::join('printer_types','printer_types.id','printers.printer_type_id')->select('*','printers.id as printer_id','printers.name as printer_name')->get();
 
         return view('admin.printer.index',compact('printers'));
     }
 
     public function deletePrinter($id)
     {
-        Printer::destroy($id);
+        Printers::destroy($id);
 
         return redirect('admin/printer');
     }
 
     public function updatePrinter(Request $request , $id)
     {
-        $printer = Printer::find($id);;
+        $printer = Printers::find($id);;
 
         $printer->name = $request->name;
         $printer->account = $request->account;
@@ -261,7 +264,7 @@ class AdminController extends Controller
 
     public function modifyPrinter($id)
     {
-        $printer = Printer::find($id);
+        $printer = Printers::find($id);
 
         $printTypes = PrinterType::all();
 
@@ -270,7 +273,7 @@ class AdminController extends Controller
 
     public function createPrinter(Request $request)
     {
-        $printer = new Printer;
+        $printer = new Printers;
 
         $printer->name = $request->name;
         $printer->account = $request->account;
@@ -284,6 +287,7 @@ class AdminController extends Controller
 
         $this->setPrinter($request->account, $request->account_key, $request->printer_sn);
         $snlist = $request->printer_sn.'#'.$request->printer_key;
+        $this->add_printer($snlist);
 
         return redirect('admin/printer');
     }

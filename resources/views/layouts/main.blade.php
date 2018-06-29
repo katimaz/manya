@@ -154,12 +154,12 @@
                 @if(!session()->has('tableId'))
                 <div class="form-group">
                     <label>@lang('setting.tableId')</label>
-                    <input type="text" class="form-control" id="tableId" name="tableId" placeholder="Enter Table Id">
+                    <input type="text" class="form-control" id="tableId" name="tableId" placeholder="請輸入桌號">
                 </div>
                 @endif
                 <div class="form-group">
                     <label>@lang('setting.password')</label>
-                    <input type="text" class="form-control" id="printCode" name="print_code" placeholder="Enter Code">
+                    <input type="text" class="form-control" id="printCode" name="print_code" placeholder="請輸入密碼">
                 </div>
                 <button type="submit" class="btn btn-primary">@lang('setting.confirm')</button>
             </form>
