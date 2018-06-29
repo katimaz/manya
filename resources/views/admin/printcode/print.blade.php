@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'QuickOrder')
+@section('title', '御滿屋')
 
 @section('css')
 <style>
