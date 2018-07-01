@@ -22,9 +22,10 @@
 @section('content')
     <div class="container corners">
         <div class="row">
-            <div class="col-sm-4"><a class="btn btn-primary a-button" href="{{route('getPrint',['count' => '1'])}}"><h1>影印密碼1張</h1></a></div>
-            <div class="col-sm-4"><a class="btn btn-success a-button" href="{{route('getPrint',['count' => '10'])}}"><h1>影印密碼10張</h1></a></div>
-            <div class="col-sm-4"><a class="btn btn-danger a-button" href="{{route('getPrint',['count' => '20'])}}"><h1>影印密碼20張</h1></a></div>
+            <div class="col-sm-6">
+                <input type="text" style="height: 53px;font-size: 30px;" class="form-control" id="table_id" placeholder="桌號" name="table_id">
+            </div>
+            <div class="col-sm-6"><a class="btn btn-primary" id="print"><h4>影印密碼</h4></a></div>
         </div>
     </div>
 
@@ -72,5 +73,18 @@
             },
         });
     })
+    
+    $('#print').click(function () {
+        var table_id = $( "#table_id" ).val();
+        $.ajax({
+            data: {table_id : table_id},
+            url: '/printKey',
+            success: function(data) {
+                if(data =="SUCCESS"){
+                    alert("桌號"+table_id+"已結帳");
+                }
+            },
+        });
+    });
 </script>
 @stop

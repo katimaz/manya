@@ -66,7 +66,8 @@ Route::get('/admin/getMenuOption', 'AdminController@getMenuOption');
 
 /*********************  Printer  *********************/
 
-Route::get('/getPrint/{count}', 'PrinterController@printKey')->name('getPrint');
+//Route::get('/getPrint', 'PrinterController@printKey')->name('getPrint');
+Route::get('/printKey', 'PrinterController@printKey')->name('printKey');
 Route::get('/printOrder/{id}', 'PrinterController@printOrder')->name('printOrder');
 
 /*********************  End Printer  *********************/

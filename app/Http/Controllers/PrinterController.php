@@ -6,34 +6,61 @@ use App\OrderFood;
 use App\Traits\Printer;
 use Carbon\Carbon;
 use App\PrintCode;
+use Illuminate\Http\Request;
+use App\Printer as Printers;
 
 class PrinterController extends Controller
 {
     use Printer;
 
-
-    public function printKey($count)
+    public function printKey(Request $request)
     {
-        if ($count) {
-            for ($i = 1; $i <= $count; $i++) {
 
-                $keyCode = $this->generateKey();
-                while (!$keyCode) {
-                    $keyCode = $this->generateKey();
-                }
-
-                $printData = '密碼　　　　　        <BR>';
-                $printData .= '--------------------------------<BR>';
-                $printData .= $keyCode->code . '<BR>';
-                $printData .= '--------------------------------<BR>';
-
-                $this->setPrinter("bjtuwangjia@gmail.com", "ebIRPMY3Zr5ISM2u", "918501940");
-                $this->getPrint($printData);
-            }
+        $keyCode = $this->generateKey();
+        while (!$keyCode) {
+            $keyCode = $this->generateKey();
         }
+
+        $qrcodeString = 'http://manya.hkqos.com?tableId='.$request->table_id.'&printCode='.$keyCode->code;
+        $printData = '<CB>御滿屋</CB><BR><BR>';
+        $printData .= '<CB>桌號 : ' .$request->table_id.'</CB><BR><BR>';
+        $printData .='<QR>'.$qrcodeString.'</QR><BR><BR>';
+        $printData .= 'Step1 : 掃瞄QRCODE,打開網頁<BR>';
+        $printData .= 'Step2 : 選擇食物,食物將會加入準備籃<BR>';
+        $printData .= 'Step3 : 按右上準備籃,調整數量並按下確認<BR>';
+        $printData .= 'Step4 : 您的食物將會在15到30分鐘送到您的桌上<BR><BR>';
+        $printData .= 'http://www.hkqos.com<BR>';
+
+        $printer = Printers::where('printer_type_id','=','4')->first();
+        $this->setPrinter($printer->account, $printer->account_key, $printer->printer_sn);
+        $this->getPrint($printData);
 
         return redirect('admin/showKey');
     }
+
+//    public function printKey(Request $request,$count)
+//    {
+//        if ($count) {
+//            for ($i = 1; $i <= $count; $i++) {
+//
+//                $keyCode = $this->generateKey();
+//                while (!$keyCode) {
+//                    $keyCode = $this->generateKey();
+//                }
+//
+//                $printData = '密碼　　　　　        <BR>';
+//                $printData .= '--------------------------------<BR>';
+//                $printData .= $keyCode->code . '<BR>';
+//                $printData .= '--------------------------------<BR>';
+//                $printData .='<QR>http://manya.hkqos.com?tableId='.$request->table_id.'&printCode='.$keyCode.'</QR>';
+//
+//                $this->setPrinter("bjtuwangjia@gmail.com", "ebIRPMY3Zr5ISM2u", "918501940");
+//                $this->getPrint($printData);
+//            }
+//        }
+//
+//        return redirect('admin/showKey');
+//    }
 
     public function printOrder($id)
     {

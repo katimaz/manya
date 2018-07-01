@@ -159,7 +159,7 @@
                 @endif
                 <div class="form-group">
                     <label>@lang('setting.password')</label>
-                    <input type="text" class="form-control" id="printCode" name="print_code" placeholder="請輸入密碼">
+                    <input type="text" class="form-control" id="printCode" name="printCode" placeholder="請輸入密碼">
                 </div>
                 <button type="submit" class="btn btn-primary">@lang('setting.confirm')</button>
             </form>

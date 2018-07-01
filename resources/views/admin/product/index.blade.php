@@ -31,15 +31,7 @@
                 <td>{{$product->products_name}}</td>
                 <td>{{$product->name}}</td>
                 <td>{{$product->description}}</td>
-                @if($product->printer_id == "2")
-                    <td>甜品</td>
-                @elseif($product->printer_id=="6")
-                    <td>壽司</td>
-                @elseif($product->printer_id =="8")
-                    <td>熟食</td>
-                @else
-
-                @endif
+                <td>{{$product->printer_name}}</td>
                 @if(!$product->active)
                     <td>Yes</td>
                 @else

@@ -62,32 +62,45 @@ class HomeController extends Controller
 
     public function validCode(Request $request){
 
-        $printCode = PrintCode::where('code',$request->print_code)->first();
+        if($request->tableId || $request->printCode){
+            $this->validateCode($request->tableId,$request->printCode);
+        }
+
+        return redirect()->back();
+    }
+
+    private function validateCode($tableId, $printCode){
+
+        $printCode = PrintCode::where('code',$printCode)->first();
 
         if(count($printCode)){
 
-            if($request->tableId){
-                Session::put('tableId',$request->tableId);
+            if($tableId){
+                Session::put('tableId',$tableId);
             }
 
             if(!$printCode->used_time){
                 $printCode->table_id = Session::get('tableId');
                 $printCode->used_time = Carbon::now()->timezone('Asia/Taipei')->addHours('2')->addMinutes('30')->toDateTimeString();
                 $printCode->save();
-                Session::put('printCode',$request->print_code);
+                Session::put('printCode',$printCode);
             }else{
                 if(Carbon::now()->timezone('Asia/Taipei')->toDateTimeString() < $printCode->used_time){
                     if(Session::get('tableId') == $printCode->table_id){
-                        Session::put('printCode',$request->print_code);
+                        Session::put('printCode',$printCode);
                     }
                 }
             }
         }
-        return redirect()->back();
+        return "SUCCESS";
     }
 
-    public function menu()
+    public function menu(Request $request)
     {
+        if($request->tableId && $request->printCode){
+            $this->validateCode($request->tableId,$request->printCode);
+        }
+
         $menus = Menu::all();
 
         $productMenus = DB::table('menus')

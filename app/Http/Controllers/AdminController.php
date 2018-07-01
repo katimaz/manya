@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Menu;
 use App\MenuProduct;
 use App\Order;
 use App\PrintCode;
 use App\Printer as Printers;
 use App\PrinterType;
 use App\Product;
-use Illuminate\Http\Request;
-use App\User;
-use App\Menu;
-use DataTables;
-use Image;
-use DB;
-use Auth;
 use App\Traits\Printer;
+use Auth;
+use DataTables;
+use DB;
+use Illuminate\Http\Request;
+use Image;
 use Session;
 
 class AdminController extends Controller
@@ -41,8 +40,9 @@ class AdminController extends Controller
     public function product()
     {
         $products = MenuProduct::join('menus', 'menus.id', '=', 'menu_products.menu_id')
+            ->join('printers','printers.id','=','menu_products.printer_id')
             ->where('restaurant_id',Auth::user()->restaurant_id)
-            ->select('*','menu_products.name as products_name','menu_products.id as products_id','menu_products.image_url as products_image_url')
+            ->select('*','menu_products.name as products_name','menu_products.id as products_id','menu_products.image_url as products_image_url','printers.name as printer_name')
             ->get();
 
         return view('admin.product.index',compact('products'));
