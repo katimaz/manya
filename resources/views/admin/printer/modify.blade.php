@@ -14,6 +14,14 @@
     {{--<div class="container">--}}
     <div class="row">
 
+        @if(session('success'))
+            <div class="alert alert-success alert-block" id="success-alert">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                {{session('success')}}
+            </div>
+            {{session()->forget('success')}}
+        @endif
+
         <div class="col-md-12">
             <form class="form-horizontal" method="post" action="{{url('admin/printer/modify/'.$printer->id)}}" enctype="multipart/form-data">
                 @csrf

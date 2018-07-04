@@ -116,6 +116,7 @@ class AdminController extends Controller
 
         $product->save();
 
+        session(['success' => '資料已修改.']);
         return redirect()->back();
     }
 
@@ -166,8 +167,8 @@ class AdminController extends Controller
         }
 
         $menu->save();
-        session(['success' => '已修改.']);
-        return back();
+        session(['success' => '資料已修改.']);
+        return redirect()->back();
     }
 
     public function createMenu(Request $request)
@@ -274,6 +275,7 @@ class AdminController extends Controller
         $printer->printer_type_id = $request->printer_type_id;
         $printer->save();
 
+        session(['success' => '資料已修改.']);
         return redirect()->back();
     }
 

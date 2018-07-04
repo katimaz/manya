@@ -24,7 +24,7 @@ class PrinterController extends Controller
         $qrcodeString = 'http://manya.hkqos.com?tableId='.$request->table_id.'&printCode='.$keyCode->code;
         $printData = '<CB>御滿屋</CB><BR><BR>';
         $printData .= '<CB>桌號 : ' .$request->table_id.'</CB><BR><BR>';
-        $printData .='<QR>'.$qrcodeString.'</QR><BR><BR>';
+        $printData .= '<QR>'.$qrcodeString.'</QR><BR><BR>';
         $printData .= 'Step1 : 掃瞄QRCODE,打開網頁<BR>';
         $printData .= 'Step2 : 選擇食物,食物將會加入準備籃<BR>';
         $printData .= 'Step3 : 按右上準備籃,調整數量並按下確認<BR>';
