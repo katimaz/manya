@@ -81,5 +81,9 @@
 @stop
 
 @section('js')
-
+<script>
+    setTimeout(function() {
+        $("#success-alert").alert('close');
+    }, 2000);
+</script>
 @stop
