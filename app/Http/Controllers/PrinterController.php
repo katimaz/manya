@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\PrintCode;
 use Illuminate\Http\Request;
 use App\Printer as Printers;
+use App\Order;
 
 class PrinterController extends Controller
 {
@@ -22,20 +23,35 @@ class PrinterController extends Controller
         }
 
         $qrcodeString = 'http://manya.hkqos.com?tableId='.$request->table_id.'&printCode='.$keyCode->code;
-        $printData = '<CB>御滿屋</CB><BR><BR>';
+        $printData  = '<CB>御滿屋</CB><BR><BR>';
         $printData .= '<CB>桌號 : ' .$request->table_id.'</CB><BR><BR>';
         $printData .= '<QR>'.$qrcodeString.'</QR><BR><BR>';
-        $printData .= 'Step1 : 掃瞄QRCODE,打開網頁<BR>';
-        $printData .= 'Step2 : 選擇食物,食物將會加入準備籃<BR>';
-        $printData .= 'Step3 : 按右上準備籃,調整數量並按下確認<BR>';
-        $printData .= 'Step4 : 您的食物將會在15到30分鐘送到您的桌上<BR><BR>';
-        $printData .= 'http://www.hkqos.com<BR>';
+        $printData .= 'Step1 : 掃瞄QR CODE,打開網頁<BR>';
+        $printData .= 'Step2 : 選擇食物,食物將會自動加入食物籃<BR>';
+        $printData .= 'Step3 : 按右上食物籃,調整數量並按下確認<BR>';
+        $printData .= 'Step4 : 您的食物將會盡快送到您的桌上<BR><BR>';
+        $printData .= 'Powered by QuickOrder<BR><BR>';
+        $printData .= 'Please visit https://hkqos.com<BR>';
+        $printData .= '<BR><BR><BR>';
 
         $printer = Printers::where('printer_type_id','=','4')->first();
         $this->setPrinter($printer->account, $printer->account_key, $printer->printer_sn);
         $this->getPrint($printData);
 
-        return redirect('admin/showKey');
+        $order = Order::where('table_id', $request->table_id)
+            ->where('paid',0)
+            ->first();
+
+        if($order === null) {
+            $order = new Order;
+            $order->table_id = $request->table_id;
+            $order->restaurant_id = 1;
+            $order->order_type_id = 1;
+            $order->print_codes_id = $keyCode->id;
+            $order->save();
+        }
+
+        return "SUCCESS";
     }
 
 //    public function printKey(Request $request,$count)

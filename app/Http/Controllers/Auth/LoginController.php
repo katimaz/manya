@@ -41,7 +41,7 @@ class LoginController extends Controller
     {
         if(auth()->user()->id == 11)
         {
-            return redirect('/admin/showKey');
+            return redirect('/admin/order');
         }
 
         return redirect('/admin');

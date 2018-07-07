@@ -230,10 +230,12 @@ class AdminController extends Controller
     public function updateOrder(Request $request, $id){
 
         $order = Order::find($id);
-
         $order->paid = $request->paid;
-
         $order->save();
+
+        $printerCode = PrintCode::find($order->print_codes_id);
+        $printerCode->done = 1;
+        $printerCode->save();
 
         return "SUCCESS";
     }

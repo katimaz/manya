@@ -33,7 +33,8 @@ return [
 
     'menu.name' =>'名稱',
 
-    'order.orderid' =>'訂號號碼',
+    'order.orderid' =>'訂單號碼',
+    'order.createdtime' =>'入座時間',
     'order.tableid' =>'桌號',
     'order.quantity' =>'數量',
     'order.paidstatus' =>'付款狀態',

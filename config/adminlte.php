@@ -137,7 +137,7 @@ return [
             'icon'        => 'clipboard',
 //            'label'       => 4,
             'label_color' => 'success',
-            'can'  => 'show-menu',
+
         ],
         [
             'text'        => '密碼',
@@ -147,13 +147,13 @@ return [
             'label_color' => 'success',
             'can'  => 'show-menu',
         ],
-        [
-            'text'        => '管理',
-            'url'         => 'admin/table',
-            'icon'        => 'table',
-//            'label'       => 4,
-            'label_color' => 'success',
-        ],
+//        [
+//            'text'        => '管理',
+//            'url'         => 'admin/table',
+//            'icon'        => 'table',
+////            'label'       => 4,
+//            'label_color' => 'success',
+//        ],
 //        [
 //            'text'        => 'Kitchen',
 //            'url'         => 'order/kitchen',

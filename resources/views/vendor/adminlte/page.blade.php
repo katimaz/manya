@@ -40,7 +40,7 @@
             @else
             <!-- Logo -->
             @if(auth::user()->id ==11)
-                <a href="{{ url('admin/showKey') }}" class="logo">
+                <a href="{{ url('admin/order') }}" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini">{!! config('adminlte.logo_mini', '<b>A</b>LT') !!}</span>
                     <!-- logo for regular state and mobile devices -->

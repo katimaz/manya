@@ -637,13 +637,13 @@ function setBackToTop(scrolled) {
     }
 }
 
-$(window).on('scroll', function (){
-    var scrolled = $(window).scrollTop();
-    if($stickableNav.length) {
-        setStickyElement(scrolled);
-    }
-    if($backToTop.length) {
-        setBackToTop(scrolled);
-    }
-});
+// $(window).on('scroll', function (){
+//     var scrolled = $(window).scrollTop();
+//     if($stickableNav.length) {
+//         setStickyElement(scrolled);
+//     }
+//     if($backToTop.length) {
+//         setBackToTop(scrolled);
+//     }
+// });
 
