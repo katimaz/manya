@@ -87,7 +87,7 @@ class HomeController extends Controller
                 ->first();
 
             if (count($printCode)) {
-                if($printCode->code == $code){
+                if ($printCode->code == $code) {
                     if ($tableId) {
                         Session::put('tableId', $tableId);
                     }
@@ -211,115 +211,117 @@ class HomeController extends Controller
             $order = Order::where('table_id', Session::get('tableId'))
                 ->where('paid', 0)
                 ->first();
+            if (count($order)) {
 
-            $printCode = PrintCode::where('id', $order->print_codes_id)
-                ->where('done', 0)
-                ->first();
+                $printCode = PrintCode::where('id', $order->print_codes_id)
+                    ->where('done', 0)
+                    ->first();
 
-            if (count($printCode)) {
-                if ($printCode->code == Session::get('printCode')) {
+                if (count($printCode)) {
+                    if ($printCode->code == Session::get('printCode')) {
 
-                    if ($printCode != null) {
-                        if ($printCode->table_id == Session::get('tableId') && (Carbon::now()->timezone('Asia/Taipei')->toDateTimeString() < $printCode->used_time)) {
+                        if ($printCode != null) {
+                            if ($printCode->table_id == Session::get('tableId') && (Carbon::now()->timezone('Asia/Taipei')->toDateTimeString() < $printCode->used_time)) {
 
-                            if ($this->cart->items != null) {
-                                $temp = '<CB>御滿屋</CB><BR><BR>';
-                                $temp .= '<B>桌號 : ' . Session::get('tableId') . '</B><BR><BR>';
-                                $temp .= '<RIGHT><B>名稱     數量</B></RIGHT><BR>';
-                                $temp .= '--------------------------------<BR>';
+                                if ($this->cart->items != null) {
+                                    $temp = '<CB>御滿屋</CB><BR><BR>';
+                                    $temp .= '<B>桌號 : ' . Session::get('tableId') . '</B><BR><BR>';
+                                    $temp .= '<RIGHT><B>名稱     數量</B></RIGHT><BR>';
+                                    $temp .= '--------------------------------<BR>';
 
-                                $order = Order::where('table_id', Session::get('tableId'))
-                                    ->where('paid', 0)
-                                    ->first();
+                                    $order = Order::where('table_id', Session::get('tableId'))
+                                        ->where('paid', 0)
+                                        ->first();
 
-                                if ($order === null) {
-                                    $order = new Order;
-                                    $order->table_id = Session::get('tableId');
-                                    $order->restaurant_id = $request->restaurantId;
-                                    $order->order_type_id = $request->orderTypeId;
-                                }
-                                $order->quantity += $this->cart->totalQty;
-                                $order->save();
-
-                                $printerFood = $temp;
-                                $printerSushi = $temp;
-                                $printerDessert = $temp;
-                                $printFood = false;
-                                $printSushi = false;
-                                $printDessert = false;
-                                foreach ($this->cart->items as $item) {
-                                    $orderFood = new OrderFood;
-                                    $orderFood->order_id = $order->id;
-                                    $orderFood->product_id = $item['items']->id;
-                                    $orderFood->quantity = $item['qty'];
-                                    $orderFood->save();
-
-                                    $product = MenuProduct::find($item['items']->id);
-                                    $printer = Printers::find($product->printer_id);
-
-                                    if ($printer->printer_type_id == 1) {
-                                        //熟食
-                                        $printerFood .= '<RIGHT><L>' . $product->name . '　　　　' . $item['qty'] . '</L></RIGHT><BR>';
-                                        $printFood = true;
-
-                                    } elseif ($printer->printer_type_id == 2) {
-                                        //壽司
-                                        $printerSushi .= '<RIGHT><L>' . $product->name . '　　　　' . $item['qty'] . '</L></RIGHT><BR>';
-                                        $printSushi = true;
-
-                                    } elseif ($printer->printer_type_id == 3) {
-                                        //甜品
-                                        $printerDessert .= '<RIGHT><L>' . $product->name . '　　　　' . $item['qty'] . '</L></RIGHT><BR>';
-                                        $printDessert = true;
-                                    } else {
-
+                                    if ($order === null) {
+                                        $order = new Order;
+                                        $order->table_id = Session::get('tableId');
+                                        $order->restaurant_id = $request->restaurantId;
+                                        $order->order_type_id = $request->orderTypeId;
                                     }
-                                }
+                                    $order->quantity += $this->cart->totalQty;
+                                    $order->save();
 
-                                $printerFood .= '--------------------------------<BR>';
-                                $printerSushi .= '--------------------------------<BR>';
-                                $printerDessert .= '--------------------------------<BR>';
-                                $printers = Printers::all();
+                                    $printerFood = $temp;
+                                    $printerSushi = $temp;
+                                    $printerDessert = $temp;
+                                    $printFood = false;
+                                    $printSushi = false;
+                                    $printDessert = false;
+                                    foreach ($this->cart->items as $item) {
+                                        $orderFood = new OrderFood;
+                                        $orderFood->order_id = $order->id;
+                                        $orderFood->product_id = $item['items']->id;
+                                        $orderFood->quantity = $item['qty'];
+                                        $orderFood->save();
 
-                                foreach ($printers as $printer) {
-                                    if ($printer->printer_type_id == 1) {
-                                        if ($printFood) {
+                                        $product = MenuProduct::find($item['items']->id);
+                                        $printer = Printers::find($product->printer_id);
+
+                                        if ($printer->printer_type_id == 1) {
                                             //熟食
-                                            $this->setPrinter($printer->account, $printer->account_key, $printer->printer_sn);
-                                            $this->getPrint($printerFood);
-                                        }
+                                            $printerFood .= '<RIGHT><L>' . $product->name . '　　　　' . $item['qty'] . '</L></RIGHT><BR>';
+                                            $printFood = true;
 
-                                    } elseif ($printer->printer_type_id == 2) {
-                                        if ($printSushi) {
+                                        } elseif ($printer->printer_type_id == 2) {
                                             //壽司
-                                            $this->setPrinter($printer->account, $printer->account_key, $printer->printer_sn);
-                                            $this->getPrint($printerSushi);
-                                        }
+                                            $printerSushi .= '<RIGHT><L>' . $product->name . '　　　　' . $item['qty'] . '</L></RIGHT><BR>';
+                                            $printSushi = true;
 
-                                    } elseif ($printer->printer_type_id == 3) {
-                                        if ($printDessert) {
+                                        } elseif ($printer->printer_type_id == 3) {
                                             //甜品
-                                            $this->setPrinter($printer->account, $printer->account_key, $printer->printer_sn);
-                                            $this->getPrint($printerDessert);
+                                            $printerDessert .= '<RIGHT><L>' . $product->name . '　　　　' . $item['qty'] . '</L></RIGHT><BR>';
+                                            $printDessert = true;
+                                        } else {
+
                                         }
                                     }
+
+                                    $printerFood .= '--------------------------------<BR>';
+                                    $printerSushi .= '--------------------------------<BR>';
+                                    $printerDessert .= '--------------------------------<BR>';
+                                    $printers = Printers::all();
+
+                                    foreach ($printers as $printer) {
+                                        if ($printer->printer_type_id == 1) {
+                                            if ($printFood) {
+                                                //熟食
+                                                $this->setPrinter($printer->account, $printer->account_key, $printer->printer_sn);
+                                                $this->getPrint($printerFood);
+                                            }
+
+                                        } elseif ($printer->printer_type_id == 2) {
+                                            if ($printSushi) {
+                                                //壽司
+                                                $this->setPrinter($printer->account, $printer->account_key, $printer->printer_sn);
+                                                $this->getPrint($printerSushi);
+                                            }
+
+                                        } elseif ($printer->printer_type_id == 3) {
+                                            if ($printDessert) {
+                                                //甜品
+                                                $this->setPrinter($printer->account, $printer->account_key, $printer->printer_sn);
+                                                $this->getPrint($printerDessert);
+                                            }
+                                        }
+                                    }
+
+                                    $request->session()->put('cart', $this->cart);
+                                    $request->session()->forget('cart');
+                                    return view('confirmation');
                                 }
-
-                                $request->session()->put('cart', $this->cart);
-                                $request->session()->forget('cart');
-                                return view('confirmation');
+                            } else {
+                                $request->session()->forget('tableId');
+                                $request->session()->forget('printCode');
                             }
-                        } else {
-                            $request->session()->forget('tableId');
-                            $request->session()->forget('printCode');
-                        }
 
+                        }
+                    } else {
+                        $request->session()->forget('tableId');
+                        $request->session()->forget('printCode');
                     }
-                }else {
-                    $request->session()->forget('tableId');
-                    $request->session()->forget('printCode');
                 }
-            }else {
+            } else {
                 $request->session()->forget('tableId');
                 $request->session()->forget('printCode');
             }

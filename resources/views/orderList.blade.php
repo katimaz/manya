@@ -79,16 +79,16 @@
                             @php ($i = "")
                             @foreach($d as $r)
                                 @if($i != $r->time)
-                                    <button class="accordion">{{$r->time}}</button>
+                                    <button class="accordion">下單時間 : {{$r->time}}</button>
                                     <div class="panel">
                                     @php ($i = $r->time)
                                 @endif
                                     <br/>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-10">
                                             <h4>{{$r->name}}</h4>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-2">
                                             <h4 style="text-align: right">{{$r->quantity}}</h4>
                                         </div>
                                     </div>
@@ -98,10 +98,10 @@
                     @endif
                     <hr style="margin-top: 0px;">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-10">
                             <h3><strong>總數</strong></h3>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-2">
                             @if(count($orderFoods)>0)
                                 <h3 style="text-align: right">
                                     <strong>{{$orderFoods[0]->total_quantity}}</strong></h3>

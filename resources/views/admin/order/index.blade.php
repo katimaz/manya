@@ -16,7 +16,7 @@
             <div class="col-sm-6">
                 <input type="text" style="height: 53px;font-size: 30px;" class="form-control" id="table_id" placeholder="桌號" name="table_id">
             </div>
-            <div class="col-sm-6"><a class="btn btn-primary" id="print"><h4>影印密碼</h4></a></div>
+            <div class="col-sm-6"><button class="btn btn-primary" id="print"><h4>影印密碼</h4></button></div>
         </div>
     </div>
     <br/>
@@ -94,19 +94,25 @@
                 });
             })
 
+
+
             $('#print').click(function () {
                 var table_id = $( "#table_id" ).val();
-
-                $.ajax({
-                    data: {table_id : table_id},
-                    url: '/printKey',
-                    success: function(data) {
-                        console.log(data);
-                        if(data =="SUCCESS"){
-                            location.reload();
-                        }
-                    },
-                });
+                if(table_id){
+                    $('#print').prop('disabled', true);
+                    $.ajax({
+                        data: {table_id : table_id},
+                        url: '/printKey',
+                        success: function(data) {
+                            console.log(data);
+                            if(data =="SUCCESS"){
+                                location.reload();
+                            }
+                        },
+                    });
+                }else{
+                    alert("請輸入桌號");
+                }
             });
         } );
     </script>

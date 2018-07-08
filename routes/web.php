@@ -51,6 +51,9 @@ Route::get('/admin/printer/modify/{id}', 'AdminController@modifyPrinter')->name(
 Route::post('/admin/printer/modify/{id}', 'AdminController@updatePrinter')->name('admin.printer.updatePrinter');
 Route::post('/admin/printer/create', 'AdminController@createPrinter')->name('admin.printer.create');
 Route::get('/admin/printer/delete/{id}', 'AdminController@deletePrinter')->name('admin.printer.deletePrinter');
+
+Route::get('/admin/setting', 'AdminController@setting')->name('admin.setting');
+Route::get('/admin/reset', 'AdminController@reset')->name('reset');
 //Route::get('/admin/promotion/add', 'PromotionController@addProduct')->name('admin.promotion.add');
 //Route::get('/admin/promotion', 'PromotionController@promotion')->name('admin.promotion');
 //Route::get('/admin/promotion/modify/{id}', 'PromotionController@modifyPromotion')->name('admin.promotion.modify');

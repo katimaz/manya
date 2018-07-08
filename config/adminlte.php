@@ -170,6 +170,14 @@ return [
             'label_color' => 'success',
             'can'  => 'show-menu',
         ],
+        [
+            'text'        => '設定',
+            'url'         => 'admin/setting',
+            'icon'        => 'gear',
+//            'label'       => 4,
+            'label_color' => 'success',
+            'can'  => 'show-menu',
+        ],
 //        [
 //            'text'        => 'Promotion',
 //            'url'         => 'admin/promotion',

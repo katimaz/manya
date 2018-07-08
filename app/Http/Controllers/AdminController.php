@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Menu;
 use App\MenuProduct;
 use App\Order;
+use App\OrderFood;
 use App\PrintCode;
 use App\Printer as Printers;
 use App\PrinterType;
@@ -316,5 +317,21 @@ class AdminController extends Controller
         $printTypes = PrinterType::all();
 
         return view('admin.printer.add',compact('printTypes'));
+    }
+
+    public function setting()
+    {
+        return view('admin.setting.index');
+    }
+
+    public function reset()
+    {
+        PrintCode::truncate();
+        Order::truncate();
+        OrderFood::truncate();
+
+        session(['success' => '資料已清除.']);
+
+        return "Success";
     }
 }
