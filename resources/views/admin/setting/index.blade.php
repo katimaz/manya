@@ -34,7 +34,7 @@
                 var r = confirm("確定是否清除資料?? 注意: 資料一被清除無法還完!!!");
                 if(r == true){
                     $.ajax({
-                        type: 'get',
+                        type: 'post',
                         url: "reset",
                         success: function(result){
                             location.reload();
