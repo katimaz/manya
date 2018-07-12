@@ -37,6 +37,7 @@ return [
     'order.createdtime' =>'入座時間',
     'order.tableid' =>'桌號',
     'order.quantity' =>'數量',
+    'order.people' =>'人數',
     'order.paidstatus' =>'付款狀態',
     'order.paid' =>'已付款',
     'order.unpaid' =>'未付款',

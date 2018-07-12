@@ -29,6 +29,7 @@
             <th>@lang('admin.order.createdtime')</th>
             <th>@lang('admin.order.tableid')</th>
             <th>@lang('admin.order.quantity')</th>
+            <th>@lang('admin.order.people')</th>
             <th>@lang('admin.order.paidstatus')</th>
             <th></th>
         </tr>
@@ -39,6 +40,7 @@
                 <td>{{$order->created_at}}</td>
                 <td>{{$order->table_id}}</td>
                 <td>{{$order->quantity}}</td>
+                <td>{{$order->people}}</td>
                 @if($order->paid)
                     <td>@lang('admin.order.paid')</td>
                 @else
