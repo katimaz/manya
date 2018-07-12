@@ -48,6 +48,7 @@ class PrinterController extends Controller
             $order->restaurant_id = 1;
             $order->order_type_id = 1;
             $order->print_codes_id = $keyCode->id;
+            $order->people = request->people;
             $order->save();
         }
 

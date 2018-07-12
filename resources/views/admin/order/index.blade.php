@@ -13,10 +13,13 @@
 @section('content')
     <div class="container corners">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <input type="text" style="height: 53px;font-size: 30px;" class="form-control" id="table_id" placeholder="桌號" name="table_id">
             </div>
-            <div class="col-sm-6"><button class="btn btn-primary" id="print"><h4>影印密碼</h4></button></div>
+            <div class="col-sm-4">
+                <input type="text" style="height: 53px;font-size: 30px;" class="form-control" id="people" placeholder="人數" name="people">
+            </div>
+            <div class="col-sm-4"><button class="btn btn-primary" id="print"><h4>影印密碼</h4></button></div>
         </div>
     </div>
     <br/>
@@ -98,10 +101,11 @@
 
             $('#print').click(function () {
                 var table_id = $( "#table_id" ).val();
-                if(table_id){
+                var poeple = $( "#people" ).val();
+                if(table_id && poeple){
                     $('#print').prop('disabled', true);
                     $.ajax({
-                        data: {table_id : table_id},
+                        data: {table_id : table_id,people : people},
                         url: '/printKey',
                         success: function(data) {
                             console.log(data);
@@ -111,7 +115,7 @@
                         },
                     });
                 }else{
-                    alert("請輸入桌號");
+                    alert("請輸入桌號/人數");
                 }
             });
         } );
