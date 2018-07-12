@@ -103,6 +103,7 @@
                             <!-- Morris chart - Sales -->
                             <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
                             <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
+                            <div class="chart tab-pane" id="sales-bar" style="position: relative; height: 300px;"></div>
                         </div>
                     </div>
                     <!-- /.nav-tabs-custom -->
