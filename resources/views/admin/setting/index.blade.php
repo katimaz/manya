@@ -33,9 +33,11 @@
             $('#reset').click(function() {
                 var r = confirm("確定是否清除資料?? 注意: 資料一被清除無法還完!!!");
                 if(r == true){
+                    var status2 = status;
                     $.ajax({
                         type: 'post',
                         url: "reset",
+                        data:{ '_token' : '{{csrf_token()}}'},
                         success: function(result){
                             location.reload();
                         }

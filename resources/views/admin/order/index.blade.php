@@ -13,13 +13,13 @@
 @section('content')
     <div class="container corners">
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-4" style="margin: 10px 0px;">
                 <input type="text" style="height: 53px;font-size: 30px;" class="form-control" id="table_id" placeholder="桌號" name="table_id">
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4" style="margin: 10px 0px;">
                 <input type="text" style="height: 53px;font-size: 30px;" class="form-control" id="people" placeholder="人數" name="people">
             </div>
-            <div class="col-sm-4"><button class="btn btn-primary" id="print"><h4>影印密碼</h4></button></div>
+            <div class="col-sm-4" style="margin: 10px 0px;"><button class="btn btn-primary" id="print"><h4>影印密碼</h4></button></div>
         </div>
     </div>
     <br/>
@@ -103,8 +103,9 @@
 
             $('#print').click(function () {
                 var table_id = $( "#table_id" ).val();
-                var poeple = $( "#people" ).val();
-                if(table_id && poeple){
+                var people = $( "#people" ).val();
+
+                if(table_id && people){
                     $('#print').prop('disabled', true);
                     $.ajax({
                         data: {table_id : table_id,people : people},

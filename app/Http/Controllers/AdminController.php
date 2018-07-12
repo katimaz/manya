@@ -326,6 +326,7 @@ class AdminController extends Controller
 
     public function reset()
     {
+
         PrintCode::truncate();
         Order::truncate();
         OrderFood::truncate();
