@@ -25,7 +25,7 @@ class PrinterController extends Controller
         $qrcodeString = 'http://manya.hkqos.com?tableId='.$request->table_id.'&printCode='.$keyCode->code;
         $printData  = '<CB>御滿屋</CB><BR><BR>';
         $printData .= '<CB>桌號 : ' .$request->table_id.'</CB><BR><BR>';
-        $printData .= '<CB>人數 : ' .$request->poeple.'</CB><BR><BR>';
+        $printData .= '<CB>人數 : ' .$request->people.'</CB><BR><BR>';
         $printData .= '<QR>'.$qrcodeString.'</QR><BR><BR>';
         $printData .= 'Step1 : 掃瞄QR CODE,打開網頁<BR>';
         $printData .= 'Step2 : 選擇食物,食物將會自動加入食物籃<BR>';
@@ -35,9 +35,12 @@ class PrinterController extends Controller
         $printData .= 'Please visit https://hkqos.com<BR>';
         $printData .= '<BR><BR><BR>';
 
-        $printer = Printers::where('printer_type_id','=','4')->first();
-        $this->setPrinter($printer->account, $printer->account_key, $printer->printer_sn);
-        $this->getPrint($printData);
+        $printers = Printers::where('printer_type_id','=','4')->get();
+
+        foreach($printers as $printer){
+            $this->setPrinter($printer->account, $printer->account_key, $printer->printer_sn);
+            $this->getPrint($printData);
+        }
 
         $order = Order::where('table_id', $request->table_id)
             ->where('paid',0)

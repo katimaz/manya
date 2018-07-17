@@ -28,31 +28,31 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="name">@lang('admin.printer.name'):</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name" value="{{$printer->name}}">
+                        <input type="text" class="form-control" id="name" placeholder="@lang('admin.printer.name')" name="name" value="{{$printer->name}}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="name">@lang('admin.printer.account'):</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="name" placeholder="Enter Account" name="account" value="{{$printer->account}}">
+                        <input type="text" class="form-control" id="name" placeholder="@lang('admin.printer.account')" name="account" value="{{$printer->account}}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="name">@lang('admin.printer.accountkey'):</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="name" placeholder="Enter Account Key" name="account_key" value="{{$printer->account_key}}">
+                        <input type="text" class="form-control" id="name" placeholder="@lang('admin.printer.accountkey')" name="account_key" value="{{$printer->account_key}}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="name">@lang('admin.printer.printerkey'):</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="name" placeholder="Enter Printer Key" name="printer_key" value="{{$printer->printer_key}}">
+                        <input type="text" class="form-control" id="name" placeholder="@lang('admin.printer.printerkey')" name="printer_key" value="{{$printer->printer_key}}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="name">@lang('admin.printer.printersn'):</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="name" placeholder="Enter Printer SN" name="printer_sn" value="{{$printer->printer_sn}}">
+                        <input type="text" class="form-control" id="name" placeholder="@lang('admin.printer.printersn')" name="printer_sn" value="{{$printer->printer_sn}}">
                     </div>
                 </div>
                 <div class="form-group">

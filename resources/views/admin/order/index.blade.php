@@ -105,20 +105,24 @@
                 var table_id = $( "#table_id" ).val();
                 var people = $( "#people" ).val();
 
-                if(table_id && people){
-                    $('#print').prop('disabled', true);
-                    $.ajax({
-                        data: {table_id : table_id,people : people},
-                        url: '/printKey',
-                        success: function(data) {
-                            console.log(data);
-                            if(data =="SUCCESS"){
-                                location.reload();
-                            }
-                        },
-                    });
+                if(!isNaN(people)){
+                    if(table_id && people){
+                        $('#print').prop('disabled', true);
+                        $.ajax({
+                            data: {table_id : table_id,people : people},
+                            url: '/printKey',
+                            success: function(data) {
+                                console.log(data);
+                                if(data =="SUCCESS"){
+                                    location.reload();
+                                }
+                            },
+                        });
+                    }else{
+                        alert("請輸入桌號/人數");
+                    }
                 }else{
-                    alert("請輸入桌號/人數");
+                    alert("請輸入正常人數");
                 }
             });
         } );
