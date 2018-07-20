@@ -11,6 +11,13 @@
 @stop
 
 @section('content')
+    @if(session('success'))
+        <div class="alert alert-success alert-block" id="success-alert">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{session('success')}}
+        </div>
+        {{session()->forget('success')}}
+    @endif
     <a style="margin-bottom: 10px" href="{{url('admin/product/add')}}" class="btn btn-xs btn-success"><i class="glyphicon glyphicon glyphicon-plus"></i> @lang('admin.add')</a>
     <br/>
     <table class="table table-striped table-bordered" id="product-table">
@@ -29,13 +36,13 @@
         @foreach($products as $product)
             <tr>
                 <td>{{$product->products_name}}</td>
-                <td>{{$product->name}}</td>
+                <td>{{$product->menu_name}}</td>
                 <td>{{$product->description}}</td>
                 <td>{{$product->printer_name}}</td>
                 @if(!$product->active)
-                    <td>Yes</td>
+                    <td>已售罄</td>
                 @else
-                    <td>No</td>
+                    <td>銷售中</td>
                 @endif
                 <td><img style="height: 80px;width: 80px;" src="{{url('/').'/public/'.$product->products_image_url}}"/></td>
                 <td>

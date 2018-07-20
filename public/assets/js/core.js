@@ -621,12 +621,12 @@ function setStickyElement(scrolled) {
         $stickableNav.removeAttr('style');
     }
 
-    if (scrolled > ($footer.offset().top - $stickableNav.outerHeight())) {
-        $stickableNav.css({
-            'position': 'absolute',
-            'top': $footer.offset().top - $stickableNav.outerHeight() - stickableNavOffset + 'px'
-        });
-    }
+    // if (scrolled > ($footer.offset().top - $stickableNav.outerHeight())) {
+    //     $stickableNav.css({
+    //         'position': 'absolute',
+    //         'top': $footer.offset().top - $stickableNav.outerHeight() - stickableNavOffset + 'px'
+    //     });
+    // }
 }
 
 function setBackToTop(scrolled) {
@@ -637,13 +637,13 @@ function setBackToTop(scrolled) {
     }
 }
 
-// $(window).on('scroll', function (){
-//     var scrolled = $(window).scrollTop();
-//     if($stickableNav.length) {
-//         setStickyElement(scrolled);
-//     }
-//     if($backToTop.length) {
-//         setBackToTop(scrolled);
-//     }
-// });
+$(window).on('scroll', function (){
+    var scrolled = $(window).scrollTop();
+    if($stickableNav.length) {
+        setStickyElement(scrolled);
+    }
+    if($backToTop.length) {
+        setBackToTop(scrolled);
+    }
+});
 

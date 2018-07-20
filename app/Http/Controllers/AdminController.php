@@ -43,7 +43,7 @@ class AdminController extends Controller
         $products = MenuProduct::join('menus', 'menus.id', '=', 'menu_products.menu_id')
             ->join('printers','printers.id','=','menu_products.printer_id')
             ->where('restaurant_id',Auth::user()->restaurant_id)
-            ->select('*','menu_products.name as products_name','menu_products.id as products_id','menu_products.image_url as products_image_url','printers.name as printer_name')
+            ->select('*','menus.name as menu_name','menu_products.name as products_name','menu_products.id as products_id','menu_products.image_url as products_image_url','printers.name as printer_name')
             ->get();
 
         return view('admin.product.index',compact('products'));
@@ -76,6 +76,8 @@ class AdminController extends Controller
 
         $product->save();
 
+        session(['success' => '食物已新增.']);
+
         return redirect('admin/product');
     }
 
@@ -92,7 +94,9 @@ class AdminController extends Controller
 
     public function deleteProduct($id)
     {
-        Product::destroy($id);
+        MenuProduct::destroy($id);
+
+        session(['success' => '食物已刪除.']);
 
         return redirect('admin/product');
     }
@@ -143,6 +147,8 @@ class AdminController extends Controller
     public function deleteMenu($id)
     {
         Menu::destroy($id);
+
+        session(['success' => '菜單已刪除.']);
 
         return redirect('admin/menu');
     }
@@ -195,6 +201,8 @@ class AdminController extends Controller
         $menu->restaurant_id = Auth::user()->restaurant_id;
 
         $menu->save();
+
+        session(['success' => '菜單已新增.']);
 
         return redirect('admin/menu');
     }

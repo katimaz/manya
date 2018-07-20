@@ -344,7 +344,7 @@
                             '           <div class="input-group-button">' +
                             '               <span class="cart-decrement">-</span>' +
                             '           </div>' +
-                            '           <input id="'+$json['items'][k]['items']['id']+'" class="input-number" type="number" value="'+$json['items'][k]['qty']+'" min="1" max="20"' +
+                            '           <input id="'+$json['items'][k]['items']['id']+'" class="input-number" value="'+$json['items'][k]['qty']+'" min="1" max="20"' +
                             '                  readonly>' +
                             '           <div class="input-group-button">' +
                             '               <span class="cart-increment">+</span>' +

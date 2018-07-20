@@ -48,7 +48,7 @@
                                     <div class="input-group-button">
                                         <span class="cart-decrement">-</span>
                                     </div>
-                                    <input id="{{$item['items']['id']}}" class="input-number" type="number" value="{{$item['qty']}}" min="1" max="20"
+                                    <input id="{{$item['items']['id']}}" class="input-number" value="{{$item['qty']}}" min="1" max="20"
                                            readonly>
                                     <div class="input-group-button">
                                         <span class="cart-increment">+</span>

@@ -11,6 +11,13 @@
 @stop
 
 @section('content')
+    @if(session('success'))
+        <div class="alert alert-success alert-block" id="success-alert">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{session('success')}}
+        </div>
+        {{session()->forget('success')}}
+    @endif
     <a style="margin-bottom: 10px" href="{{url('admin/menu/add')}}" class="btn btn-xs btn-success"><i class="glyphicon glyphicon glyphicon-plus"></i> @lang('admin.add')</a>
     <table class="table table-striped table-bordered" id="menus-table">
         <thead>
