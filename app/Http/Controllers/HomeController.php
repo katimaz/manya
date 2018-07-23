@@ -280,11 +280,11 @@ class HomeController extends Controller
                                 }
                         
                                 $printerFood .= '--------------------------------<BR>';
-                                $printerFood.='<BR><BR><BR><BR><BR>';
+                                $printerFood .='<BR><BR><BR><BR><BR>';
                                 $printerSushi .= '--------------------------------<BR>';
-                                $printerSushi.='<BR><BR><BR><BR><BR>';
+                                $printerSushi .='<BR><BR><BR><BR><BR>';
                                 $printerDessert .= '--------------------------------<BR>';
-                                $printerDessert.='<BR><BR><BR><BR><BR>';
+                                $printerDessert .='<BR><BR><BR><BR><BR>';
                                 $printers = Printers::all();
                         
                                 foreach ($printers as $printer) {
